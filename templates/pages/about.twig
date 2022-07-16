@@ -1,0 +1,15 @@
+{% extends "base.twig" %}
+
+{% block title %}About{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block content %}
+    <h1>About</h1>
+    <p class="important">
+        This is just to show the that the routing is working for other pages.
+    </p>
+{% endblock %}
