@@ -28,7 +28,7 @@ class PageController extends AppController
                 $title = "Home";
                 $template = $this->twig->load('home.twig');
                 break;
-            case 'about':
+            case '/about':
                 $title = "About";
                 $template = $this->twig->load('about.twig');
                 break;
