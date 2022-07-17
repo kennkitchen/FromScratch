@@ -2,16 +2,9 @@
 
 namespace App\Routes;
 
-use App\Routes\RequestInterface;
-
-class Request implements RequestInterface
+class Request
 {
     function __construct()
-    {
-        $this->bootstrapSelf();
-    }
-
-    private function bootstrapSelf()
     {
         foreach($_SERVER as $key => $value)
         {

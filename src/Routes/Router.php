@@ -8,8 +8,9 @@ use App\Controllers\PageController;
 
 class Router
 {
-    private $request;
-    private $supportedHttpMethods = array(
+    private Request $request;
+
+    private array $supportedHttpMethods = array(
         "GET",
         "POST"
     );
@@ -19,25 +20,38 @@ class Router
         $this->request = $request;
     }
 
-    function __call($name, $args)
-    {
-        list($route, $method) = $args;
-
-        if(!in_array(strtoupper($name), $this->supportedHttpMethods))
-        {
-            $this->invalidMethodHandler();
+    public function handleRequest() {
+        if (!in_array($this->request->requestMethod, $this->supportedHttpMethods)) {
+            //todo handle better!
+            var_dump($this->request); die;
         }
 
-        $this->{strtolower($name)}[$this->formatRoute($route)] = $method;
+        //todo maybe some sanitizing?
+
+
+        // fix home -- todo this could be a setting
+        if ($this->request->requestUri == "/") {
+            $requestUri = "/home";
+        } else {
+            $requestUri = $this->request->requestUri;
+        }
+
+        if (strlen($this->request->queryString) > 0) {
+            //todo handle parms
+        }
+
+        //todo Handle when there's more than one "/" (i.e. /users vs. /users/add)
+
+        //todo Pages are handled differently (but right now they're all we handle)
+        $page = new PageController();
+        $output = $page->pageHandler($this->removeSlashes($requestUri));
+
+        return $output;
+
     }
 
-    /**
-     * Removes trailing forward slashes from the right of the route.
-     * @param route (string)
-     */
-    private function formatRoute($route)
-    {
-        $result = rtrim($route, '/');
+    private function removeSlashes($route) {
+        $result = ltrim(rtrim($route, '/'), '/');
         if ($result === '')
         {
             return '/';
@@ -45,37 +59,6 @@ class Router
         return $result;
     }
 
-    private function invalidMethodHandler()
-    {
-        header("{$this->request->serverProtocol} 405 Method Not Allowed");
-    }
 
-    private function defaultRequestHandler()
-    {
-        header("{$this->request->serverProtocol} 404 Not Found");
-    }
-
-    /**
-     * Resolves a route
-     */
-    function resolve()
-    {
-        $methodDictionary = $this->{strtolower($this->request->requestMethod)};
-        $formatedRoute = $this->formatRoute($this->request->requestUri);
-        $method = $methodDictionary[$formatedRoute];
-
-        if(is_null($method))
-        {
-            $this->defaultRequestHandler();
-            return;
-        }
-
-        echo call_user_func_array($method, array($this->request));
-    }
-
-    function __destruct()
-    {
-        $this->resolve();
-    }
 
 }

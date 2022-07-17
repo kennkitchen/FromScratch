@@ -10,19 +10,9 @@ class PageController extends AppController
         parent::__construct();
     }
 
-    public function home_handler() {
-        $template = $this->twig->load('home.twig');
-        echo $template->render(['page_title' => 'Home', 'a_variable' => 'You are here!!!']);
-//        return 0;
-    }
-
-    public function about_handler() {
-        $template = $this->twig->load('about.twig');
-        echo $template->render(['page_title' => 'About', 'a_variable' => 'You are also here!!!']);
-//        return 0;
-    }
-
-    public function page_handler($page) {
+    public function pageHandler($page) {
+        $template = $this->twig->load( strtolower($page) . '.twig');
+        $title = ucwords($page);
         switch ($page) {
             case '/':
                 $title = "Home";
