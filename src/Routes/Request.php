@@ -2,8 +2,17 @@
 
 namespace App\Routes;
 
+/**
+ *
+ */
 class Request
 {
+    /**
+     * Class Constructor
+     *
+     * This iterates through all the things sent in a request and outputs them into an associative array.
+     *
+     */
     function __construct()
     {
         foreach($_SERVER as $key => $value)
@@ -12,6 +21,14 @@ class Request
         }
     }
 
+    /**
+     * To Camel Case
+     *
+     * Convert all keys to Camel Case.
+     *
+     * @param $string
+     * @return array|string|string[]
+     */
     private function toCamelCase($string)
     {
         $result = strtolower($string);
@@ -27,6 +44,7 @@ class Request
         return $result;
     }
 
+    //todo Not used yet so not finished.
     public function getBody()
     {
         if($this->requestMethod === "GET")
