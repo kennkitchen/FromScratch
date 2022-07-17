@@ -6,8 +6,7 @@ namespace App\Routes;
 use App\Routes\Request;
 use App\Controllers\PageController;
 
-class Router
-{
+class Router {
     private Request $request;
 
     private array $supportedHttpMethods = array(
@@ -15,8 +14,7 @@ class Router
         "POST"
     );
 
-    function __construct(Request $request)
-    {
+    function __construct(Request $request) {
         $this->request = $request;
     }
 
@@ -26,10 +24,8 @@ class Router
             var_dump($this->request); die;
         }
 
-        //todo maybe some sanitizing?
-
-
-        // fix home -- todo this could be a setting
+        // fix home todo This could be a setting
+        // also todo This could be part of the removeSlashes (i.e. cleaning up the route)
         if ($this->request->requestUri == "/") {
             $requestUri = "/home";
         } else {

@@ -2,11 +2,9 @@
 
 namespace App\Controllers;
 
-class PageController extends AppController
-{
+class PageController extends AppController {
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
     }
 

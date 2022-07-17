@@ -5,18 +5,16 @@ namespace App\Routes;
 /**
  *
  */
-class Request
-{
+class Request {
     /**
      * Class Constructor
      *
      * This iterates through all the things sent in a request and outputs them into an associative array.
      *
      */
-    function __construct()
-    {
-        foreach($_SERVER as $key => $value)
-        {
+    function __construct() {
+        foreach($_SERVER as $key => $value) {
+            //todo Maybe also some sanitizing?
             $this->{$this->toCamelCase($key)} = $value;
         }
     }
@@ -29,8 +27,7 @@ class Request
      * @param $string
      * @return array|string|string[]
      */
-    private function toCamelCase($string)
-    {
+    private function toCamelCase($string) {
         $result = strtolower($string);
 
         preg_match_all('/_[a-z]/', $result, $matches);
@@ -45,13 +42,11 @@ class Request
     }
 
     //todo Not used yet so not finished.
-    public function getBody()
-    {
+    public function getBody() {
         if($this->requestMethod === "GET")
         {
             return;
         }
-
 
         if ($this->requestMethod == "POST")
         {

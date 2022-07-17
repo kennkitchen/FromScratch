@@ -15,9 +15,24 @@ Not a lot! But... a lot.
   * PageController - processes all static pages
 * Routes
   * Request Class (sanitizes and standardizes)
-  * RequestInterface Class
   * Router Class (sends things on their merry way)
 * templates (Twig templates)
 
 ### Demo Site
 [framework.webinology.cloud](https://framework.webinology.cloud)
+
+## Webserver
+Make sure the webroot is set to www.
+### Apache
+For Apache, the following .htaccess is required:
+```shell
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.php [L]
+</IfModule>
+```
+### Nginx
+Mostly just works.
