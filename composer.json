@@ -18,8 +18,7 @@
   },
   "autoload": {
     "psr-4": {
-      "App\\Controllers\\": "Controllers/",
-      "App\\Routes\\": "Routes/"
+      "App\\": "src/"
     }
   },
   "require-dev": {
