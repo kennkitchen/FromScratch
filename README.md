@@ -1,8 +1,10 @@
-# FromScratch (II)
-(Yes, there was another "FromScratch" a while back!)
+# FromScratch
+This is a work in-progress to develop a fairly simple PHP framework. Ultimately I plan to use this as an instructional 
+tool, either for blog posts or a training class.
 
 ## What's Here
-Not a lot! But... a lot.
+Not a lot! But... a lot. Twig templates, a controller for static pages, and a very basic router. Oh and a borrowed theme 
+from W3 Schools!
 
 ### Structure
 * .htaccess - needed for Apache
